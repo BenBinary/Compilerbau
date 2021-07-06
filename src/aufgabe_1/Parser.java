@@ -16,7 +16,7 @@ public class Parser {
 		
 		
 		boolean result = false;
-		Token t = lexer.getNextToken();
+		Token t = lexer.getToken();
 		
 		while (!isEOF(t)) {
 			
@@ -37,6 +37,20 @@ public class Parser {
 		
 	}
 	
+	/**
+	 * 
+	 * @param token
+	 */
+	private void matchToken(Token token) {
+		
+		if (lexer.getToken().kind == token.kind) {
+			
+			lexer.getNextChar();
+			
+		}
+
+	}
+	
 	
 	private boolean checkNumber(Token t) {
 		
@@ -45,7 +59,7 @@ public class Parser {
 			if (t.kind == Type.NUMBER || t.kind == Type.VARIBALE) {
 				
 				// Rekursiv um weitere Elemente zu ermitteln
-				t = lexer.getNextToken();
+				t = lexer.getToken();
 				// if (t.kind == Type.NUMBER || t.kind == Type.VARIBALE) {
 					this.checkNumber(t);
 				// }
@@ -67,7 +81,7 @@ public class Parser {
 				t.kind == Type.MINUS || t.kind == Type.TIMES) {
 			
 			// Rekursiv um weitere Elemente zu ermitteln
-			t = lexer.getNextToken();
+			t = lexer.getToken();
 	
 			this.checkOperator(t);
 			
