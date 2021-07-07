@@ -37,17 +37,37 @@ TOKEN : {
 // Parserregeln / Grammatik
 // Compilation Unit
 // CU -- > 
-void cu() : {}{
+Node cu() : {Node node; }{
 
-  or() <EOF>
+  // Für AST gibt man hierdrin eine Knotenklasse zurück
+  
+
+  node = or() <EOF>
+
+  {
+	
+    // Es lassen sich auch Aktionen ausführen, sobald der Java-Code erkannt wurde
+	// Hier nach der Regel
+	return node;
+	
+  }
   
 }
 
 
 
 // OR --> Concat ("|" Concat ) *
-void or() : {}{
-	concat() ("|" concat())*
+Node or() : {Node left, right; } {
+  
+	left = concat() (
+
+	  	"|"
+	  	concat()
+		{ left = new Node(left, right) }
+	)*
+
+	{ return left; }
+	
 }
 
 
