@@ -22,8 +22,15 @@
 	 Codeerzeugung
 	 - jjtree <Dateiname>.jjt
 	 - javacc <Dateiname>.jj
+	 Für jede angegebene Knotenklasse wird eine extra Klasse (siehe Klassenstruktur) angelegt
 
-	 
+
+		
+		
+	 Ändern mit Präfix mit NODE_PREFIX
+
+	 TRACK_TOKENS = true;
+	 Bestimmmen wo ein  Fehler beginnt und wieder endet.
 	 
 */
 
@@ -33,12 +40,16 @@ options {
 	DEBUG_PARSER = true;
 	NODE_DEFAULT_VOID = true;
 	MULTI = true;
+	TRACK_TOKENS = true;
+	
 
 }
 
 
 // Parser
 PARSER_BEGIN(RegAusdruck)
+
+package aufgabe_2
 
 public class RegAusdruck {
 

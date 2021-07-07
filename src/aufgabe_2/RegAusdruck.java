@@ -27,6 +27,7 @@ public class RegAusdruck/*@bgen(jjtree)*/implements RegAusdruckTreeConstants, Re
   ASTOr jjtn000 = new ASTOr(JJTOR);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
+  jjtn000.jjtSetFirstToken(getToken(1));
       try {
         concat();
         label_1:
@@ -60,6 +61,7 @@ if (jjtc000) {
       } finally {
 if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
+            jjtn000.jjtSetLastToken(getToken(0));
           }
       }
     throw new Error("Missing return statement in function");
@@ -76,6 +78,7 @@ if (jjtc000) {
   ASTConcat jjtn000 = new ASTConcat(JJTCONCAT);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
+  jjtn000.jjtSetFirstToken(getToken(1));
       try {
         star();
         label_2:
@@ -111,6 +114,7 @@ if (jjtc000) {
       } finally {
 if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
+            jjtn000.jjtSetLastToken(getToken(0));
           }
       }
     } finally {
@@ -126,6 +130,7 @@ if (jjtc000) {
   ASTStar jjtn000 = new ASTStar(JJTSTAR);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
+  jjtn000.jjtSetFirstToken(getToken(1));
       try {
         atom();
         label_3:
@@ -158,6 +163,7 @@ if (jjtc000) {
       } finally {
 if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
+            jjtn000.jjtSetLastToken(getToken(0));
           }
       }
     } finally {
@@ -173,6 +179,7 @@ if (jjtc000) {
   ASTAtom jjtn000 = new ASTAtom(JJTATOM);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
+  jjtn000.jjtSetFirstToken(getToken(1));
       try {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case Char:{
@@ -215,6 +222,7 @@ if (jjtc000) {
       } finally {
 if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
+            jjtn000.jjtSetLastToken(getToken(0));
           }
       }
     } finally {

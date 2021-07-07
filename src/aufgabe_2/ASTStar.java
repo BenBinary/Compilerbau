@@ -12,5 +12,18 @@ class ASTStar extends SimpleNode {
     super(p, id);
   }
 
+  /*
+public void jjtSetLastToken(Token token) {
+	// TODO Auto-generated method stub
+	
+}
+
+public void jjtSetLastToken(Token token) {
+	// TODO Auto-generated method stub
+	
+}
+*/
+  
+  
 }
 /* JavaCC - OriginalChecksum=14884870d4c456f631aaedd40f15e291 (do not edit this line) */
