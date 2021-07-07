@@ -1,0 +1,97 @@
+/*
+
+	### GENERIC ###
+
+	Vollständige Beschreibung einer Grammatik
+	Dient als Grundlage für einen Parser oder einen Lexer
+
+*/
+
+
+/*
+
+	### AST-Erzeugung mithilfe von JJ-Tree ###
+	
+	Default bei JJ-Tree
+	Ohne Einschränkung würde für jedes NT ein Knoten erzeugt werden - mit den entsprechenden Kindern
+
+	Mit NODE_DEFAULT_VOID = true; werden zunächst keinen Knoten erzeugt, man muss explizit angeben welche Knoten erzeugt werden sollen
+	 - Mit #KNOTEN gibt man entsprechende Knoten an
+	 - Mit multi werden verschiedene Klassen erzeugt
+
+	 Codeerzeugung
+	 - jjtree <Dateiname>.jjt
+	 - javacc <Dateiname>.jj
+
+	 
+	 
+*/
+
+options {
+
+	STATIC = false;
+	DEBUG_PARSER = true;
+	NODE_DEFAULT_VOID = true;
+	MULTI = true;
+
+}
+
+
+// Parser
+PARSER_BEGIN(RegAusdruck)
+
+public class RegAusdruck {
+
+}
+
+PARSER_END(RegAusdruck)
+
+// Lexer
+TOKEN : {
+
+	<Char : ["a"-"z", "A"-"Z", "0"-"9"]>
+	| <Empty : "\"\"" > | <EmptySet : "{}">
+	| "(" | ")" | "*" | "|"
+
+}
+
+// Parserregeln / Grammatik
+// Compilation Unit
+// CU -- > 
+void cu() : {}{
+
+  // Für AST gibt man hierdrin eine Knotenklasse zurück
+   or() <EOF>
+
+}
+
+
+
+// OR --> Concat ("|" Concat ) *
+Node or() #Or : {} {
+  
+	concat() ("|" concat())*
+
+}
+
+
+// Concat --> Star (Star)*
+void concat() #Concat : {} {
+
+	star() (star())*
+	 
+}
+
+// Star --> Atom ("*")*		Bspl. a**
+void star() #Star : {} {
+	atom() ("*")*
+
+}
+
+// Atom --> <Char> | <Empty> | <EmptySet> | "(" Or ")"
+void atom() #Atom : {}{
+	<Char >
+	| <Empty>
+	| <EmptySet>
+	|  "(" or() ")"
+}
