@@ -1,7 +1,6 @@
 package aufgabe_1;
 
 import aufgabe_1.Token.Type;
-import sun.jvm.hotspot.oops.ObjectHistogramElement;
 
 public class Lexer {
 

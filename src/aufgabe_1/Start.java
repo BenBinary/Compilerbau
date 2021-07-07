@@ -5,7 +5,7 @@ public class Start {
 	public static void main(String[] args) {
 		
 		Start s = new Start();
-		s.ueberpruefe("5+x");
+		s.ueberpruefe("5+x ");
 	
 	
 	

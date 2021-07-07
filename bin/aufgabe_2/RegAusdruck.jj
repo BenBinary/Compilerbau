@@ -1,0 +1,73 @@
+/*
+
+	Vollständige Beschreibung einer Grammatik
+	Dient als Grundlage für einen Parser oder einen Lexer
+
+*/
+
+options {
+
+	STATIC = false;
+	DEBUG_PARSER = true;
+
+}
+
+
+// Parser
+PARSER_BEGIN(RegAusdruck)
+
+public class RegAusdruck {
+
+
+}
+
+PARSER_END(RegAusdruck)
+
+
+// Lexer
+TOKEN : {
+
+	<Char : ["a"-"z", "A"-"Z", "0"-"9"]>
+	| <Empty : "\"\"" > | <EmptySet : "{}">
+	| "(" | ")" | "*" | "|"
+
+}
+
+
+// Parserregeln / Grammatik
+// Compilation Unit
+// CU -- > 
+void cu() : {}{
+
+  or() <EOF>
+  
+}
+
+
+
+// OR --> Concat ("|" Concat ) *
+void or() : {}{
+	concat() ("|" concat())*
+}
+
+
+// Concat --> Star (Star)*
+void concat() : {} {
+
+	star() (star())*
+	 
+}
+
+// Star --> Atom ("*")*		Bspl. a**
+void star() : {} {
+	atom() ("*")*
+
+}
+
+// Atom --> <Char> | <Empty> | <EmptySet> | "(" Or ")"
+void atom() : {}{
+	<Char >
+	| <Empty>
+	| <EmptySet>
+	|  "(" or() ")"
+}
