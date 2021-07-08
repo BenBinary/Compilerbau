@@ -13,8 +13,8 @@ public class BasicScript implements BasicScriptConstants {
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case Char:
+        case Empty:
         case EmptySet:
-        case 4:
         case 10:
         case 11:
         case 12:
@@ -28,6 +28,7 @@ public class BasicScript implements BasicScriptConstants {
           break label_1;
         }
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case Empty:
         case 10:
         case 11:{
           decl();
@@ -35,7 +36,6 @@ public class BasicScript implements BasicScriptConstants {
           }
         case Char:
         case EmptySet:
-        case 4:
         case 12:
         case 13:
         case 20:{
@@ -67,6 +67,10 @@ public class BasicScript implements BasicScriptConstants {
         }
       case 11:{
         jj_consume_token(11);
+        break;
+        }
+      case Empty:{
+        jj_consume_token(Empty);
         break;
         }
       default:
@@ -103,8 +107,25 @@ public class BasicScript implements BasicScriptConstants {
     trace_call("type");
     try {
 
-      jj_consume_token(Char);
-      jj_consume_token(8);
+      atom();
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case 8:{
+        jj_consume_token(8);
+        break;
+        }
+      case Empty:{
+        jj_consume_token(Empty);
+        break;
+        }
+      case EmptySet:{
+        jj_consume_token(EmptySet);
+        break;
+        }
+      default:
+        jj_la1[4] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
     } finally {
       trace_return("type");
     }
@@ -120,10 +141,6 @@ public class BasicScript implements BasicScriptConstants {
         sumStmnt();
       } else {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-        case 4:{
-          compareStmnt();
-          break;
-          }
         case Char:
         case EmptySet:{
           atom();
@@ -143,7 +160,7 @@ public class BasicScript implements BasicScriptConstants {
           break;
           }
         default:
-          jj_la1[4] = jj_gen;
+          jj_la1[5] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -174,7 +191,7 @@ void ifStmnt() throws ParseException {
     try {
 
       jj_consume_token(13);
-      stmnt();
+      compareStmnt();
       block();
       jj_consume_token(14);
       block();
@@ -189,7 +206,8 @@ void ifStmnt() throws ParseException {
     try {
 
       jj_consume_token(20);
-      atom();
+      compareStmnt();
+      block();
     } finally {
       trace_return("whileStmnt");
     }
@@ -207,8 +225,8 @@ void ifStmnt() throws ParseException {
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case Char:
+        case Empty:
         case EmptySet:
-        case 4:
         case 10:
         case 11:
         case 12:
@@ -218,10 +236,11 @@ void ifStmnt() throws ParseException {
           break;
           }
         default:
-          jj_la1[5] = jj_gen;
+          jj_la1[6] = jj_gen;
           break label_2;
         }
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case Empty:
         case 10:
         case 11:{
           decl();
@@ -229,7 +248,6 @@ void ifStmnt() throws ParseException {
           }
         case Char:
         case EmptySet:
-        case 4:
         case 12:
         case 13:
         case 20:{
@@ -237,7 +255,7 @@ void ifStmnt() throws ParseException {
           break;
           }
         default:
-          jj_la1[6] = jj_gen;
+          jj_la1[7] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -254,6 +272,7 @@ void ifStmnt() throws ParseException {
     try {
 
       jj_consume_token(Char);
+      jj_consume_token(8);
     } finally {
       trace_return("expr");
     }
@@ -279,8 +298,20 @@ void ifStmnt() throws ParseException {
     trace_call("sumStmnt");
     try {
 
-      jj_consume_token(6);
-      atom();
+      label_3:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case 6:{
+          ;
+          break;
+          }
+        default:
+          jj_la1[8] = jj_gen;
+          break label_3;
+        }
+        jj_consume_token(6);
+        atom();
+      }
       jj_consume_token(8);
     } finally {
       trace_return("sumStmnt");
@@ -315,7 +346,7 @@ void ifStmnt() throws ParseException {
         break;
         }
       default:
-        jj_la1[7] = jj_gen;
+        jj_la1[9] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -332,13 +363,24 @@ void ifStmnt() throws ParseException {
     finally { jj_save(0, xla); }
   }
 
-  private boolean jj_3R_sumStmnt_139_3_4()
+  private boolean jj_3R_sumStmnt_137_4_6()
  {
     if (jj_scan_token(6)) return true;
     return false;
   }
 
-  private boolean jj_3R_atom_155_9_3()
+  private boolean jj_3R_sumStmnt_137_3_5()
+ {
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_sumStmnt_137_4_6()) { jj_scanpos = xsp; break; }
+    }
+    if (jj_scan_token(8)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_atom_153_9_4()
  {
     Token xsp;
     xsp = jj_scanpos;
@@ -351,8 +393,8 @@ void ifStmnt() throws ParseException {
 
   private boolean jj_3_1()
  {
-    if (jj_3R_atom_155_9_3()) return true;
-    if (jj_3R_sumStmnt_139_3_4()) return true;
+    if (jj_3R_atom_153_9_4()) return true;
+    if (jj_3R_sumStmnt_137_3_5()) return true;
     return false;
   }
 
@@ -367,13 +409,13 @@ void ifStmnt() throws ParseException {
   private Token jj_scanpos, jj_lastpos;
   private int jj_la;
   private int jj_gen;
-  final private int[] jj_la1 = new int[8];
+  final private int[] jj_la1 = new int[10];
   static private int[] jj_la1_0;
   static {
 	   jj_la1_init_0();
 	}
 	private static void jj_la1_init_0() {
-	   jj_la1_0 = new int[] {0x103c1a,0x103c1a,0xc00,0x10c,0x10301a,0x103c1a,0x103c1a,0xa,};
+	   jj_la1_0 = new int[] {0x103c0e,0x103c0e,0xc04,0x10c,0x10c,0x10300a,0x103c0e,0x103c0e,0x40,0xa,};
 	}
   final private JJCalls[] jj_2_rtns = new JJCalls[1];
   private boolean jj_rescan = false;
@@ -393,7 +435,7 @@ void ifStmnt() throws ParseException {
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 8; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 10; i++) jj_la1[i] = -1;
 	 for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -408,7 +450,7 @@ void ifStmnt() throws ParseException {
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 8; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 10; i++) jj_la1[i] = -1;
 	 for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -419,7 +461,7 @@ void ifStmnt() throws ParseException {
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 8; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 10; i++) jj_la1[i] = -1;
 	 for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -438,7 +480,7 @@ void ifStmnt() throws ParseException {
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 8; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 10; i++) jj_la1[i] = -1;
 	 for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -448,7 +490,7 @@ void ifStmnt() throws ParseException {
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 8; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 10; i++) jj_la1[i] = -1;
 	 for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -458,7 +500,7 @@ void ifStmnt() throws ParseException {
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 8; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 10; i++) jj_la1[i] = -1;
 	 for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -596,7 +638,7 @@ void ifStmnt() throws ParseException {
 	   la1tokens[jj_kind] = true;
 	   jj_kind = -1;
 	 }
-	 for (int i = 0; i < 8; i++) {
+	 for (int i = 0; i < 10; i++) {
 	   if (jj_la1[i] == jj_gen) {
 		 for (int j = 0; j < 32; j++) {
 		   if ((jj_la1_0[i] & (1<<j)) != 0) {

@@ -7,8 +7,9 @@ x * y;
 
 if (x<5) {
   int l;
+  3;
   print l;
 }
 else {
-  x = 5;
+  x = 5 = 7;
 }

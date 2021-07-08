@@ -56,17 +56,17 @@ void cu() : {} {
 
 // declaration
 // checks if its int or double
+// dynamic typisation is possible
 void decl() : {} {
 
-	("int" | "double") <Char > ( ";" | <Empty> | <EmptySet> )
-       
+	("int" | "double" | <Empty >) <Char > ( ";" | <Empty> | <EmptySet> )
 
 }
 
 // type
 void type() : {} {
 
-  <Char> ";"
+  atom() ( ";" | <Empty> | <EmptySet> )
 
 }
 
@@ -75,11 +75,11 @@ void stmnt() : {} {
 
   LOOKAHEAD(2)
   atom() sumStmnt()
-| compareStmnt()
 | atom() prodStmnt()
 | whileStmnt()
 | printStmnt()
 | ifStmnt()
+
 
 
   
@@ -97,14 +97,14 @@ void printStmnt(): {} {
 
 void ifStmnt() : {} {
 	
-  "if" stmnt() block() "else" block()
+  "if" compareStmnt() block() "else" block()
 
 }
 
 // while Statement
 void whileStmnt() : {} {
 
-  "while" atom()
+  "while" compareStmnt() block()
 
 }
 
@@ -113,14 +113,14 @@ void whileStmnt() : {} {
 // block
 void block(): {} {
 
-  "{" (decl() | stmnt() )*  "}"
+  "{" (decl() | stmnt())*  "}"
 
 }
 
 // expression
 void expr(): {} {
 
-	<Char >	  
+	<Char >	 ";"
 
 }
 
@@ -135,7 +135,7 @@ void compareStmnt() : {} {
 // sum
 void sumStmnt() : {} {
 
-  "=" atom() ";" 
+  ("=" atom())* ";" 
 
 }
 
