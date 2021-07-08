@@ -176,7 +176,7 @@ void concat()             : {/*@bgen(jjtree) #Concat(> 1) */
             jjtn000.jjtSetLastToken(getToken(0));
           }
         }
-/*@egen*/ // | (star())*
+/*@egen*/ // (star())*
 	 
 }
 

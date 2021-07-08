@@ -2,10 +2,25 @@
 package aufgabe_2;
 
 public class RegAusdruckDefaultVisitor implements RegAusdruckVisitor{
+	
+	/**
+	 * 
+	 * Durch das visitor-Pattern wird der Code deutlich schmaler und die Abhängigkeiten werden reduziert
+	 * 
+	 * Alternative dazu ist AntLR  
+	 * 
+	 * @param node
+	 * @param data
+	 * @return
+	 */
+	
+	// Das Default visit besucht die Kinder
+	
   public Object defaultVisit(SimpleNode node, Object data){
     node.childrenAccept(this, data);
     return data;
   }
+  
   public Object visit(SimpleNode node, Object data){
     return defaultVisit(node, data);
   }

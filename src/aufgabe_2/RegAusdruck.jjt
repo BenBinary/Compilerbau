@@ -116,7 +116,7 @@ void or() #Or(>1) : {} {
 // Concat --> Star (Star)*
 void concat() #Concat(>1) : {} {
 
-	star() // | (star())*
+	star() // (star())*
 	 
 }
 
