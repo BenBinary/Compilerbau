@@ -13,7 +13,7 @@ public interface BasicScriptConstants {
   /** RegularExpression Id. */
   int Char = 1;
   /** RegularExpression Id. */
-  int Emtpy = 2;
+  int Empty = 2;
   /** RegularExpression Id. */
   int EmptySet = 3;
 
@@ -41,6 +41,7 @@ public interface BasicScriptConstants {
     "\"}\"",
     "\" \"",
     "\"\\t\"",
+    "\"\\n\"",
     "\"while\"",
     "\">\"",
   };

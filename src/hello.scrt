@@ -1,5 +1,5 @@
 double x;
-double y
+double y;
 
 int z;
 x * y;

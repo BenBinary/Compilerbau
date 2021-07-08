@@ -8,13 +8,13 @@ public class Start {
 	public static void main(String[] args) throws IOException {
 		
 		// Starting the parser
-		RegAusdruck parser = new RegAusdruck(new StringReader("(ab|c*"));
+		//RegAusdruck parser = new RegAusdruck(new StringReader("(ab|c*"));
 		
 		try {
 			
-			parser.cu();
+			// parser.cu();
 			
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -3,8 +3,9 @@
 Fragenkatalog
 
  - Wie deklariert man richtig?
- - 
-
+ - Wie kann ich einen Block und die entsprechenden Elemente darin bestmöglich schreiben
+ - Wie kann ich einen Block komplett lesen?
+ 
 */
 
 options {
@@ -30,7 +31,7 @@ PARSER_END(BasicScript)
 TOKEN : {
 
 	<Char: ["a"-"z", "A"-"Z", "0"-"9"] >
-	| <Emtpy : "\"\"" >
+	| <Empty : "\"\"" >
 	| <EmptySet : "{}" >
 	|  "(" | ")" | "=" | "*" | ";" | "<"
 	| "int" | "double" | "print" | "if" | "else"
@@ -41,14 +42,15 @@ TOKEN : {
 // Chars to ignore
 SKIP : {
   
-	" " | "\t"
+	" " | "\t" | "\n"
 	
 }
 
 // 1. cu
 void cu() : {} {
 
-  decl() <EOF>
+	(decl() | stmnt())* <EOF>
+ 	// (decl() | stmnt())*  <EOF>
 
 }
 
@@ -56,7 +58,8 @@ void cu() : {} {
 // checks if its int or double
 void decl() : {} {
 
-  ("int" | "double") type()
+	("int" | "double") <Char > ( ";" | <Empty> | <EmptySet> )
+       
 
 }
 
@@ -70,7 +73,7 @@ void type() : {} {
 // statement
 void stmnt() : {} {
 
-	<Char >
+	prodStmnt() | sumStmnt()
   
 } 
 
@@ -125,14 +128,14 @@ void compare() : {} {
 // sum
 void sumStmnt() : {} {
 
-  atom() "=" atom()
+  atom() "=" atom() ";"
 
 }
 
 // prod
 void prodStmnt() : {} {
 
-	atom() "*" atom()
+	atom() "*" atom() ";"
 
 }
 
