@@ -108,8 +108,16 @@ void or()         : {/*@bgen(jjtree) #Or(> 1) */
 	
 	// In #Or() kann es eine Bedingung geben, sobald ein Knoten angelegt wird
 	// Bei #Or(> 1) wird dieser nur erzeugt, sobald ein Kindknoten vorhanden ist
-  	
-	concat() ("|" concat())*/*@bgen(jjtree)*/
+
+  	try {
+
+		concat()
+		 
+	} catch(ParseError pe) {
+
+	}
+	
+	("|" concat())*/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -147,7 +155,7 @@ void concat()             : {/*@bgen(jjtree) #Concat(> 1) */
         try {
 /*@egen*/
 
-	star() (star())*/*@bgen(jjtree)*/
+	star() | (star())*/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -239,7 +247,14 @@ void atom()       : {/*@bgen(jjtree) Atom */
 	<Char> // "!"
 	| <Empty>
 	| <EmptySet>
-	|  "(" or() ")"/*@bgen(jjtree)*/
+	|  "(" or() ")"
+	|/*@bgen(jjtree)*/
+          {
+            jjtree.closeNodeScope(jjtn000, true);
+            jjtc000 = false;
+            jjtn000.jjtSetLastToken(getToken(0));
+          }
+/*@egen*/ { skipTo(); }/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -261,4 +276,11 @@ void atom()       : {/*@bgen(jjtree) Atom */
           }
         }
 /*@egen*/
+}
+
+
+// normaler Java-Code
+JAVACODE 
+void skiptTo() {
+	
 }

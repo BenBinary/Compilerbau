@@ -29,7 +29,11 @@ public class RegAusdruck/*@bgen(jjtree)*/implements RegAusdruckTreeConstants, Re
   jjtree.openNodeScope(jjtn000);
   jjtn000.jjtSetFirstToken(getToken(1));
       try {
-        concat();
+        try {
+          concat();
+        } catch (ParseError pe) {
+
+        }
         label_1:
         while (true) {
           switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -80,22 +84,6 @@ if (jjtc000) {
   jjtn000.jjtSetFirstToken(getToken(1));
       try {
         star();
-        label_2:
-        while (true) {
-          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-          case Char:
-          case Empty:
-          case EmptySet:
-          case 4:{
-            ;
-            break;
-            }
-          default:
-            jj_la1[1] = jj_gen;
-            break label_2;
-          }
-          star();
-        }
       } catch (Throwable jjte000) {
 if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -139,7 +127,7 @@ void star() throws ParseException {
   jjtn000.jjtSetFirstToken(getToken(1));
       try {
         atom();
-        label_3:
+        label_2:
         while (true) {
           switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
           case 6:{
@@ -147,8 +135,8 @@ void star() throws ParseException {
             break;
             }
           default:
-            jj_la1[2] = jj_gen;
-            break label_3;
+            jj_la1[1] = jj_gen;
+            break label_2;
           }
           jj_consume_token(6);
         }
@@ -217,9 +205,11 @@ if (jjtc000) {
           break;
           }
         default:
-          jj_la1[3] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
+          jj_la1[2] = jj_gen;
+jjtree.closeNodeScope(jjtn000, true);
+            jjtc000 = false;
+            jjtn000.jjtSetLastToken(getToken(0));
+skipTo();
         }
       } catch (Throwable jjte000) {
 if (jjtc000) {
@@ -246,6 +236,14 @@ if (jjtc000) {
     }
 }
 
+  void skiptTo() throws ParseException {
+    trace_call("skiptTo");
+    try {
+    } finally {
+      trace_return("skiptTo");
+    }
+  }
+
   /** Generated Token Manager. */
   public RegAusdruckTokenManager token_source;
   SimpleCharStream jj_input_stream;
@@ -255,13 +253,13 @@ if (jjtc000) {
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[4];
+  final private int[] jj_la1 = new int[3];
   static private int[] jj_la1_0;
   static {
 	   jj_la1_init_0();
 	}
 	private static void jj_la1_init_0() {
-	   jj_la1_0 = new int[] {0x80,0x1e,0x40,0x1e,};
+	   jj_la1_0 = new int[] {0x80,0x40,0x1e,};
 	}
 
   {
@@ -278,7 +276,7 @@ if (jjtc000) {
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -293,7 +291,7 @@ if (jjtc000) {
 	 jj_ntk = -1;
 	 jjtree.reset();
 	 jj_gen = 0;
-	 for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -303,7 +301,7 @@ if (jjtc000) {
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -322,7 +320,7 @@ if (jjtc000) {
 	 jj_ntk = -1;
 	 jjtree.reset();
 	 jj_gen = 0;
-	 for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -331,7 +329,7 @@ if (jjtc000) {
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -341,7 +339,7 @@ if (jjtc000) {
 	 jj_ntk = -1;
 	 jjtree.reset();
 	 jj_gen = 0;
-	 for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -399,7 +397,7 @@ if (jjtc000) {
 	   la1tokens[jj_kind] = true;
 	   jj_kind = -1;
 	 }
-	 for (int i = 0; i < 4; i++) {
+	 for (int i = 0; i < 3; i++) {
 	   if (jj_la1[i] == jj_gen) {
 		 for (int j = 0; j < 32; j++) {
 		   if ((jj_la1_0[i] & (1<<j)) != 0) {

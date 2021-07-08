@@ -97,8 +97,16 @@ void or() #Or(>1) : {} {
 	
 	// In #Or() kann es eine Bedingung geben, sobald ein Knoten angelegt wird
 	// Bei #Or(> 1) wird dieser nur erzeugt, sobald ein Kindknoten vorhanden ist
-  	
-	concat() ("|" concat())*
+
+  	try {
+
+		concat()
+		 
+	} catch(ParseError pe) {
+
+	}
+	
+	("|" concat())*
 
 	//  { jjtThis.firstConcat  }
 
@@ -108,7 +116,7 @@ void or() #Or(>1) : {} {
 // Concat --> Star (Star)*
 void concat() #Concat(>1) : {} {
 
-	star() (star())*
+	star() // | (star())*
 	 
 }
 
@@ -145,4 +153,12 @@ void atom() #Atom : {}{
 	| <Empty>
 	| <EmptySet>
 	|  "(" or() ")"
+	| { skipTo(); }
+}
+
+
+// normaler Java-Code
+JAVACODE 
+void skiptTo() {
+	
 }
