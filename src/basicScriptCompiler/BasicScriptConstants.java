@@ -43,7 +43,6 @@ public interface BasicScriptConstants {
     "\"\\t\"",
     "\"\\n\"",
     "\"while\"",
-    "\">\"",
   };
 
 }
