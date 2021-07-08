@@ -55,31 +55,131 @@ public class BasicScript implements BasicScriptConstants {
 }
 
 // statement
+  final public void stmnt() throws ParseException {
+    trace_call("stmnt");
+    try {
+
+      jj_consume_token(Char);
+    } finally {
+      trace_return("stmnt");
+    }
+}
 
 // print Statement
-/*
-void printStmnt() {} : {
+  final public 
+void printStmnt() throws ParseException {
+    trace_call("printStmnt");
+    try {
 
-  "print"
-
-} */
+      jj_consume_token(12);
+      atom();
+    } finally {
+      trace_return("printStmnt");
+    }
+}
 
 // if Statement
+  final public 
+void ifStmnt() throws ParseException {
+    trace_call("ifStmnt");
+    try {
+
+      jj_consume_token(13);
+      atom();
+    } finally {
+      trace_return("ifStmnt");
+    }
+}
 
 // while Statement
+  final public void whileStmnt() throws ParseException {
+    trace_call("whileStmnt");
+    try {
+
+      jj_consume_token(19);
+      atom();
+    } finally {
+      trace_return("whileStmnt");
+    }
+}
 
 // expression Statement like ";" 
 
 // block
+  final public void block() throws ParseException {
+    trace_call("block");
+    try {
+
+      atom();
+      jj_consume_token(8);
+    } finally {
+      trace_return("block");
+    }
+}
 
 // expression
+  final public void expr() throws ParseException {
+    trace_call("expr");
+    try {
+
+      jj_consume_token(Char);
+    } finally {
+      trace_return("expr");
+    }
+}
 
 // compare
+  final public void compare() throws ParseException {
+    trace_call("compare");
+    try {
+
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case Char:
+      case EmptySet:{
+        atom();
+        jj_consume_token(20);
+        break;
+        }
+      case 9:{
+        jj_consume_token(9);
+        atom();
+        break;
+        }
+      default:
+        jj_la1[1] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    } finally {
+      trace_return("compare");
+    }
+}
 
 // sum
+  final public void sumStmnt() throws ParseException {
+    trace_call("sumStmnt");
+    try {
+
+      atom();
+      jj_consume_token(6);
+      atom();
+    } finally {
+      trace_return("sumStmnt");
+    }
+}
 
 // prod
+  final public void prodStmnt() throws ParseException {
+    trace_call("prodStmnt");
+    try {
 
+      atom();
+      jj_consume_token(7);
+      atom();
+    } finally {
+      trace_return("prodStmnt");
+    }
+}
 
 // atom
   final public void atom() throws ParseException {
@@ -96,7 +196,7 @@ void printStmnt() {} : {
         break;
         }
       default:
-        jj_la1[1] = jj_gen;
+        jj_la1[2] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -114,13 +214,13 @@ void printStmnt() {} : {
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[2];
+  final private int[] jj_la1 = new int[3];
   static private int[] jj_la1_0;
   static {
 	   jj_la1_init_0();
 	}
 	private static void jj_la1_init_0() {
-	   jj_la1_0 = new int[] {0xc00,0xa,};
+	   jj_la1_0 = new int[] {0xc00,0x20a,0xa,};
 	}
 
   {
@@ -137,7 +237,7 @@ void printStmnt() {} : {
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -151,7 +251,7 @@ void printStmnt() {} : {
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -161,7 +261,7 @@ void printStmnt() {} : {
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -179,7 +279,7 @@ void printStmnt() {} : {
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -188,7 +288,7 @@ void printStmnt() {} : {
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -197,7 +297,7 @@ void printStmnt() {} : {
 	 token = new Token();
 	 jj_ntk = -1;
 	 jj_gen = 0;
-	 for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+	 for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -250,12 +350,12 @@ void printStmnt() {} : {
   /** Generate ParseException. */
   public ParseException generateParseException() {
 	 jj_expentries.clear();
-	 boolean[] la1tokens = new boolean[19];
+	 boolean[] la1tokens = new boolean[21];
 	 if (jj_kind >= 0) {
 	   la1tokens[jj_kind] = true;
 	   jj_kind = -1;
 	 }
-	 for (int i = 0; i < 2; i++) {
+	 for (int i = 0; i < 3; i++) {
 	   if (jj_la1[i] == jj_gen) {
 		 for (int j = 0; j < 32; j++) {
 		   if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -264,7 +364,7 @@ void printStmnt() {} : {
 		 }
 	   }
 	 }
-	 for (int i = 0; i < 19; i++) {
+	 for (int i = 0; i < 21; i++) {
 	   if (la1tokens[i]) {
 		 jj_expentry = new int[1];
 		 jj_expentry[0] = i;

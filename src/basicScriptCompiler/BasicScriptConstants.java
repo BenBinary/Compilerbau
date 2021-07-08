@@ -41,6 +41,8 @@ public interface BasicScriptConstants {
     "\"}\"",
     "\" \"",
     "\"\\t\"",
+    "\"while\"",
+    "\">\"",
   };
 
 }

@@ -1,3 +1,12 @@
+/**
+
+Fragenkatalog
+
+ - Wie deklariert man richtig?
+ - 
+
+*/
+
 options {
 
 	STATIC = false;
@@ -74,15 +83,16 @@ void printStmnt(): {} {
 }
 
 // if Statement
-void if() : {} {
 
-	<IDENTIFIER>
-  //"*" atom()
+void ifStmnt() : {} {
+
+	
+  "if" atom()
 
 }
 
 // while Statement
-void while() : {} {
+void whileStmnt() : {} {
 
   "while" atom()
 
@@ -91,21 +101,41 @@ void while() : {} {
 // expression Statement like ";" 
 
 // block
-void block() {} {
+void block(): {} {
 
   atom() ";"
-
-  
 
 }
 
 // expression
+void expr(): {} {
+
+	<Char >	  
+
+}
 
 // compare
+void compare() : {} {
+
+  atom() ">" | "<"  atom()
+
+
+}
 
 // sum
+void sumStmnt() : {} {
+
+  atom() "=" atom()
+
+}
 
 // prod
+void prodStmnt() : {} {
+
+	atom() "*" atom()
+
+}
+
 
 
 // atom
