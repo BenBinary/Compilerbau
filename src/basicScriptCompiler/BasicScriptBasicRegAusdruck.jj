@@ -1,0 +1,95 @@
+options {
+
+	STATIC = false;
+	DEBUG_PARSER = true;
+
+}
+
+PARSER_BEGIN(BasicScript)
+
+package basicScriptCompiler;
+
+public class BasicScript {
+
+
+}
+
+
+PARSER_END(BasicScript)
+
+
+TOKEN : {
+
+	<Char: ["a"-"z", "A"-"Z", "0"-"9"] >
+	| <Emtpy : "\"\"" >
+	| <EmptySet : "{}" >
+	|  "(" | ")" | "=" | "*" | ";" | "<"
+	| "int" | "double" | "print" | "if" | "else"
+	|  "{" | "}"
+	
+}
+
+SKIP : {
+  
+	" " | "\t"
+	
+}
+
+// 1. cu
+void cu() : {} {
+
+  decl() <EOF>
+
+}
+
+// declaration
+void decl() : {} {
+
+  "int" | "double" type()
+
+}
+
+// type
+void type() : {} {
+
+  <Char> ";"
+
+}
+
+// statement
+
+// print Statement
+/*
+void printStmnt() {} : {
+
+  "print"
+
+} */
+
+// if Statement
+
+// while Statement
+
+// expression Statement like ";" 
+
+// block
+
+// expression
+
+// compare
+
+// sum
+
+// prod
+
+
+// atom
+void atom() : {} {
+
+	<Char >
+	// | <Empty>
+	| <EmptySet>
+	  
+
+  
+  }
