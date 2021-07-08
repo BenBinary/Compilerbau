@@ -73,7 +73,9 @@ void type() : {} {
 // statement
 void stmnt() : {} {
 
-	prodStmnt() | sumStmnt()
+  LOOKAHEAD("*") prodStmnt()
+| LOOKAHEAD("=") sumStmnt()
+	 
   
 } 
 
@@ -88,7 +90,6 @@ void printStmnt(): {} {
 // if Statement
 
 void ifStmnt() : {} {
-
 	
   "if" atom()
 
