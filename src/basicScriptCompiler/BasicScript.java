@@ -14,6 +14,7 @@ public class BasicScript implements BasicScriptConstants {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case Char:
         case EmptySet:
+        case 4:
         case 10:
         case 11:
         case 12:
@@ -34,6 +35,7 @@ public class BasicScript implements BasicScriptConstants {
           }
         case Char:
         case EmptySet:
+        case 4:
         case 12:
         case 13:
         case 20:{
@@ -115,17 +117,17 @@ public class BasicScript implements BasicScriptConstants {
 
       if (jj_2_1(2)) {
         atom();
-        compareStmnt();
+        sumStmnt();
       } else {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case 4:{
+          compareStmnt();
+          break;
+          }
         case Char:
         case EmptySet:{
           atom();
           prodStmnt();
-          break;
-          }{
-          atom();
-          sumStmnt();
           break;
           }
         case 20:{
@@ -172,9 +174,9 @@ void ifStmnt() throws ParseException {
     try {
 
       jj_consume_token(13);
-      jj_consume_token(4);
       stmnt();
-      jj_consume_token(5);
+      block();
+      jj_consume_token(14);
       block();
     } finally {
       trace_return("ifStmnt");
@@ -206,6 +208,7 @@ void ifStmnt() throws ParseException {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case Char:
         case EmptySet:
+        case 4:
         case 10:
         case 11:
         case 12:
@@ -226,6 +229,7 @@ void ifStmnt() throws ParseException {
           }
         case Char:
         case EmptySet:
+        case 4:
         case 12:
         case 13:
         case 20:{
@@ -260,7 +264,11 @@ void ifStmnt() throws ParseException {
     trace_call("compareStmnt");
     try {
 
+      jj_consume_token(4);
+      atom();
       jj_consume_token(9);
+      atom();
+      jj_consume_token(5);
     } finally {
       trace_return("compareStmnt");
     }
@@ -324,6 +332,12 @@ void ifStmnt() throws ParseException {
     finally { jj_save(0, xla); }
   }
 
+  private boolean jj_3R_sumStmnt_139_3_4()
+ {
+    if (jj_scan_token(6)) return true;
+    return false;
+  }
+
   private boolean jj_3R_atom_155_9_3()
  {
     Token xsp;
@@ -338,7 +352,7 @@ void ifStmnt() throws ParseException {
   private boolean jj_3_1()
  {
     if (jj_3R_atom_155_9_3()) return true;
-    if (jj_scan_token(9)) return true;
+    if (jj_3R_sumStmnt_139_3_4()) return true;
     return false;
   }
 
@@ -359,7 +373,7 @@ void ifStmnt() throws ParseException {
 	   jj_la1_init_0();
 	}
 	private static void jj_la1_init_0() {
-	   jj_la1_0 = new int[] {0x103c0a,0x103c0a,0xc00,0x10c,0x10300a,0x103c0a,0x103c0a,0xa,};
+	   jj_la1_0 = new int[] {0x103c1a,0x103c1a,0xc00,0x10c,0x10301a,0x103c1a,0x103c1a,0xa,};
 	}
   final private JJCalls[] jj_2_rtns = new JJCalls[1];
   private boolean jj_rescan = false;

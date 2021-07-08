@@ -74,9 +74,9 @@ void type() : {} {
 void stmnt() : {} {
 
   LOOKAHEAD(2)
-  atom() compareStmnt()
+  atom() sumStmnt()
+| compareStmnt()
 | atom() prodStmnt()
-| atom() sumStmnt()
 | whileStmnt()
 | printStmnt()
 | ifStmnt()
@@ -97,7 +97,7 @@ void printStmnt(): {} {
 
 void ifStmnt() : {} {
 	
-  "if" "(" stmnt() ")" block()
+  "if" stmnt() block() "else" block()
 
 }
 
@@ -113,7 +113,7 @@ void whileStmnt() : {} {
 // block
 void block(): {} {
 
-  "{" (decl() | stmnt())*  "}"
+  "{" (decl() | stmnt() )*  "}"
 
 }
 
@@ -127,7 +127,7 @@ void expr(): {} {
 // compare
 void compareStmnt() : {} {
 
-  "<"
+  "(" atom() "<" atom() ")"
 
 
 }
@@ -135,7 +135,7 @@ void compareStmnt() : {} {
 // sum
 void sumStmnt() : {} {
 
-  "=" atom() ";"
+  "=" atom() ";" 
 
 }
 
