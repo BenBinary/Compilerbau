@@ -122,7 +122,14 @@ if (jjtc000) {
 }
 
 // Star --> Atom ("*")*		Bspl. a**
-  final public void star() throws ParseException {
+// Welche Regel wird hier abhängig vom Lookahead ausgeführt?
+
+// Syntaktischer Lookeahed: 	LOOKAHEAD(("a")*("*")) atom()("*")*
+// Semantischer Lookeahed:		LOOKAHEAD( { getToken(15).kind==char }) atom()("*")*
+
+// 
+  final public 
+void star() throws ParseException {
     trace_call("star");
     try {
 /*@bgen(jjtree) Star */
@@ -172,6 +179,15 @@ if (jjtc000) {
 
 // Atom --> <Char> | <Empty> | <EmptySet> | "(" Or ")"
 // Es kann schnell gehen, dass die Regeln nicht mehr eindeutig sind
+// Die zweite Regel wird nicht ausgeführt
+// Mit dem Lookahead 2 kann man die nächsten beiden Tokens einlesen
+
+/*
+		Warning: Choice conflict involving two expansions at
+         line 117, column 9 and line 118, column 11 respectively.
+         A common prefix is: <Char>
+
+*/
   final public void atom() throws ParseException {
     trace_call("atom");
     try {
@@ -184,10 +200,6 @@ if (jjtc000) {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case Char:{
           jj_consume_token(Char);
-          break;
-          }{
-          jj_consume_token(Char);
-          jj_consume_token(8);
           break;
           }
         case Empty:{
@@ -382,7 +394,7 @@ if (jjtc000) {
   /** Generate ParseException. */
   public ParseException generateParseException() {
 	 jj_expentries.clear();
-	 boolean[] la1tokens = new boolean[9];
+	 boolean[] la1tokens = new boolean[10];
 	 if (jj_kind >= 0) {
 	   la1tokens[jj_kind] = true;
 	   jj_kind = -1;
@@ -396,7 +408,7 @@ if (jjtc000) {
 		 }
 	   }
 	 }
-	 for (int i = 0; i < 9; i++) {
+	 for (int i = 0; i < 10; i++) {
 	   if (la1tokens[i]) {
 		 jj_expentry = new int[1];
 		 jj_expentry[0] = i;

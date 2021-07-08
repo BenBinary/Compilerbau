@@ -28,8 +28,6 @@ private int jjStopAtPos(int pos, int kind)
 private int jjMoveStringLiteralDfa0_0(){
    switch(curChar)
    {
-      case 33:
-         return jjStopAtPos(0, 8);
       case 34:
          return jjMoveStringLiteralDfa1_0(0x4L);
       case 40:
@@ -136,7 +134,7 @@ private int jjMoveNfa_0(int startState, int curPos)
 
 /** Token literal values. */
 public static final String[] jjstrLiteralImages = {
-"", null, "\42\42", "\173\175", "\50", "\51", "\52", "\174", "\41", };
+"", null, "\42\42", "\173\175", "\50", "\51", "\52", "\174", null, null, };
 protected Token jjFillToken()
 {
    final Token t;
@@ -191,6 +189,11 @@ public Token getNextToken()
       return matchedToken;
    }
 
+   try { input_stream.backup(0);
+      while (curChar <= 32 && (0x100000200L & (1L << curChar)) != 0L)
+         curChar = input_stream.BeginToken();
+   }
+   catch (java.io.IOException e1) { continue EOFLoop; }
    jjmatchedKind = 0x7fffffff;
    jjmatchedPos = 0;
    curPos = jjMoveStringLiteralDfa0_0();
@@ -198,8 +201,15 @@ public Token getNextToken()
    {
       if (jjmatchedPos + 1 < curPos)
          input_stream.backup(curPos - jjmatchedPos - 1);
+      if ((jjtoToken[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L)
+      {
          matchedToken = jjFillToken();
          return matchedToken;
+      }
+      else
+      {
+         continue EOFLoop;
+      }
    }
    int error_line = input_stream.getEndLine();
    int error_column = input_stream.getEndColumn();
@@ -331,13 +341,13 @@ public static final String[] lexStateNames = {
 
 /** Lex State array. */
 public static final int[] jjnewLexState = {
-   -1, -1, -1, -1, -1, -1, -1, -1, -1, 
+   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
 };
 static final long[] jjtoToken = {
-   0x1ffL, 
+   0xffL, 
 };
 static final long[] jjtoSkip = {
-   0x0L, 
+   0x300L, 
 };
 static final long[] jjtoSpecial = {
    0x0L, 

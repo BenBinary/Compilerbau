@@ -75,6 +75,13 @@ TOKEN : {
 
 }
 
+// Ignorieren von Leerzeichen und Tab-Stopps
+SKIP : {
+
+	" " | "\t"
+
+}
+
 // Parserregeln / Grammatik
 // Compilation Unit
 // CU -- > 
@@ -85,7 +92,7 @@ void cu() : {}{
 
 }
 
-
+  
 
 // OR --> Concat ("|" Concat ) *
 void or()         : {/*@bgen(jjtree) #Or(> 1) */
@@ -166,6 +173,13 @@ void concat()             : {/*@bgen(jjtree) #Concat(> 1) */
 }
 
 // Star --> Atom ("*")*		Bspl. a**
+// Welche Regel wird hier abh\u00e4ngig vom Lookahead ausgef\u00fchrt?
+
+// Syntaktischer Lookeahed: 	LOOKAHEAD(("a")*("*")) atom()("*")*
+// Semantischer Lookeahed:		LOOKAHEAD( { getToken(15).kind==char }) atom()("*")*
+
+// 
+
 void star()       : {/*@bgen(jjtree) Star */
   ASTStar jjtn000 = new ASTStar(JJTSTAR);
   boolean jjtc000 = true;
@@ -174,7 +188,9 @@ void star()       : {/*@bgen(jjtree) Star */
 /*@egen*/} {/*@bgen(jjtree) Star */
         try {
 /*@egen*/
-	atom() ("*")*/*@bgen(jjtree)*/
+
+	
+	atom()("*")*/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -196,11 +212,21 @@ void star()       : {/*@bgen(jjtree) Star */
           }
         }
 /*@egen*/
+	
 
 }
 
 // Atom --> <Char> | <Empty> | <EmptySet> | "(" Or ")"
 // Es kann schnell gehen, dass die Regeln nicht mehr eindeutig sind
+// Die zweite Regel wird nicht ausgef\u00fchrt
+// Mit dem Lookahead 2 kann man die n\u00e4chsten beiden Tokens einlesen
+
+/*
+		Warning: Choice conflict involving two expansions at
+         line 117, column 9 and line 118, column 11 respectively.
+         A common prefix is: <Char>
+
+*/
 void atom()       : {/*@bgen(jjtree) Atom */
   ASTAtom jjtn000 = new ASTAtom(JJTATOM);
   boolean jjtc000 = true;
@@ -209,8 +235,8 @@ void atom()       : {/*@bgen(jjtree) Atom */
 /*@egen*/}{/*@bgen(jjtree) Atom */
         try {
 /*@egen*/
-	<Char >
-	| <Char> "!"	 
+	//LOOKAHED(2) <Char>
+	<Char> // "!"
 	| <Empty>
 	| <EmptySet>
 	|  "(" or() ")"/*@bgen(jjtree)*/

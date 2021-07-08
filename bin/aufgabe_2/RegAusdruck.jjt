@@ -71,6 +71,13 @@ TOKEN : {
 
 }
 
+// Ignorieren von Leerzeichen und Tab-Stopps
+SKIP : {
+
+	" " | "\t"
+
+}
+
 // Parserregeln / Grammatik
 // Compilation Unit
 // CU -- > 
@@ -115,8 +122,8 @@ void concat() #Concat(>1) : {} {
 
 void star() #Star : {} {
 
-	LOOKAHEAD(atom() ("*")*) atom(("*")*
-	| atom()
+	
+	atom()("*")*
 	
 
 }
