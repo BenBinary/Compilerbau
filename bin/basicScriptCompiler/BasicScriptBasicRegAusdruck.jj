@@ -17,7 +17,7 @@ public class BasicScript {
 
 PARSER_END(BasicScript)
 
-
+// Lexer
 TOKEN : {
 
 	<Char: ["a"-"z", "A"-"Z", "0"-"9"] >
@@ -29,6 +29,7 @@ TOKEN : {
 	
 }
 
+// Chars to ignore
 SKIP : {
   
 	" " | "\t"
@@ -43,9 +44,10 @@ void cu() : {} {
 }
 
 // declaration
+// checks if its int or double
 void decl() : {} {
 
-  "int" | "double" type()
+  ("int" | "double") type()
 
 }
 
@@ -57,22 +59,45 @@ void type() : {} {
 }
 
 // statement
+void stmnt() : {} {
+
+	<Char >
+  
+} 
 
 // print Statement
-/*
-void printStmnt() {} : {
 
-  "print"
+void printStmnt(): {} {
 
-} */
+  "print" atom()
+
+}
 
 // if Statement
+void if() : {} {
+
+	<IDENTIFIER>
+  //"*" atom()
+
+}
 
 // while Statement
+void while() : {} {
+
+  "while" atom()
+
+}
 
 // expression Statement like ";" 
 
 // block
+void block() {} {
+
+  atom() ";"
+
+  
+
+}
 
 // expression
 

@@ -17,6 +17,7 @@ public class BasicScript implements BasicScriptConstants {
 }
 
 // declaration
+// checks if its int or double
   final public void decl() throws ParseException {
     trace_call("decl");
     try {
@@ -28,7 +29,6 @@ public class BasicScript implements BasicScriptConstants {
         }
       case 11:{
         jj_consume_token(11);
-        type();
         break;
         }
       default:
@@ -36,6 +36,7 @@ public class BasicScript implements BasicScriptConstants {
         jj_consume_token(-1);
         throw new ParseException();
       }
+      type();
     } finally {
       trace_return("decl");
     }
