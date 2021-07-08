@@ -45,6 +45,7 @@ options {
 	NODE_DEFAULT_VOID = true;
 	MULTI = true;
 	TRACK_TOKENS = true;
+	VISITOR = true;
 	
 
 }
@@ -53,7 +54,7 @@ options {
 // Parser
 PARSER_BEGIN(RegAusdruck)
 
-package aufgabe_2
+package aufgabe_2;
 
 public class RegAusdruck {
 
@@ -80,17 +81,19 @@ void cu() : {}{
 
 }
 
-
+  
 
 // OR --> Concat ("|" Concat ) *
-void or() #Or : {>1} {
+void or() #Or(>1) : {} {
 
   	// TODO: Nehmen des obersten Element vom Stack
 	
 	// In #Or() kann es eine Bedingung geben, sobald ein Knoten angelegt wird
 	// Bei #Or(> 1) wird dieser nur erzeugt, sobald ein Kindknoten vorhanden ist
   	
-	concat() { jjtThis.firstConcat  } ("|" concat())*
+	concat() ("|" concat())*
+
+	//  { jjtThis.firstConcat  }
 
 }
 
@@ -103,14 +106,35 @@ void concat() #Concat(>1) : {} {
 }
 
 // Star --> Atom ("*")*		Bspl. a**
+// Welche Regel wird hier abhängig vom Lookahead ausgeführt?
+
+// Syntaktischer Lookeahed: 	LOOKAHEAD(("a")*("*")) atom()("*")*
+// Semantischer Lookeahed:		LOOKAHEAD( { getToken(15).kind==char }) atom()("*")*
+
+// 
+
 void star() #Star : {} {
-	atom() ("*")*
+
+	LOOKAHEAD(atom() ("*")*) atom(("*")*
+	| atom()
+	
 
 }
 
 // Atom --> <Char> | <Empty> | <EmptySet> | "(" Or ")"
+// Es kann schnell gehen, dass die Regeln nicht mehr eindeutig sind
+// Die zweite Regel wird nicht ausgeführt
+// Mit dem Lookahead 2 kann man die nächsten beiden Tokens einlesen
+
+/*
+		Warning: Choice conflict involving two expansions at
+         line 117, column 9 and line 118, column 11 respectively.
+         A common prefix is: <Char>
+
+*/
 void atom() #Atom : {}{
-	<Char >
+	//LOOKAHED(2) <Char>
+	<Char> // "!"
 	| <Empty>
 	| <EmptySet>
 	|  "(" or() ")"

@@ -10,4 +10,6 @@ public interface Node {
 
 	void jjtOpen();
 
+	void jjtAccept(RegAusdruckVisitor visitor, Object data);
+
 }

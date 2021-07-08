@@ -26,12 +26,16 @@
 	 F\u00fcr jede angegebene Knotenklasse wird eine extra Klasse (siehe Klassenstruktur) angelegt
 
 
-		## OPTIONS ##
+		
 		
 	 \u00c4ndern mit Pr\u00e4fix mit NODE_PREFIX
 
 	 TRACK_TOKENS = true;
 	 Bestimmmen wo ein  Fehler beginnt und wieder endet.
+
+	 In SimpleNode gibt es dann hierf\u00fcr
+	   	protected Token firstToken;
+  		protected Token lastToken;
 	 
 */
 
@@ -42,6 +46,7 @@ options {
 	                         
 	             
 	                    
+	               
 	
 
 }
@@ -49,6 +54,8 @@ options {
 
 // Parser
 PARSER_BEGIN(RegAusdruck)
+
+package aufgabe_2;
 
 public class RegAusdruck/*@bgen(jjtree)*/implements RegAusdruckTreeConstants/*@egen*/ {/*@bgen(jjtree)*/
   protected JJTRegAusdruckState jjtree = new JJTRegAusdruckState();
@@ -81,15 +88,20 @@ void cu() : {}{
 
 
 // OR --> Concat ("|" Concat ) *
-Node or()     : {/*@bgen(jjtree) Or */
+void or()         : {/*@bgen(jjtree) #Or(> 1) */
   ASTOr jjtn000 = new ASTOr(JJTOR);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
   jjtn000.jjtSetFirstToken(getToken(1));
-/*@egen*/} {/*@bgen(jjtree) Or */
+/*@egen*/} {/*@bgen(jjtree) #Or(> 1) */
         try {
 /*@egen*/
-  
+
+  	// TODO: Nehmen des obersten Element vom Stack
+	
+	// In #Or() kann es eine Bedingung geben, sobald ein Knoten angelegt wird
+	// Bei #Or(> 1) wird dieser nur erzeugt, sobald ein Kindknoten vorhanden ist
+  	
 	concat() ("|" concat())*/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
@@ -107,22 +119,24 @@ Node or()     : {/*@bgen(jjtree) Or */
           throw (Error)jjte000;
         } finally {
           if (jjtc000) {
-            jjtree.closeNodeScope(jjtn000, true);
+            jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
             jjtn000.jjtSetLastToken(getToken(0));
           }
         }
 /*@egen*/
 
+	//  { jjtThis.firstConcat  }
+
 }
 
 
 // Concat --> Star (Star)*
-void concat()         : {/*@bgen(jjtree) Concat */
+void concat()             : {/*@bgen(jjtree) #Concat(> 1) */
   ASTConcat jjtn000 = new ASTConcat(JJTCONCAT);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
   jjtn000.jjtSetFirstToken(getToken(1));
-/*@egen*/} {/*@bgen(jjtree) Concat */
+/*@egen*/} {/*@bgen(jjtree) #Concat(> 1) */
         try {
 /*@egen*/
 
@@ -143,7 +157,7 @@ void concat()         : {/*@bgen(jjtree) Concat */
           throw (Error)jjte000;
         } finally {
           if (jjtc000) {
-            jjtree.closeNodeScope(jjtn000, true);
+            jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
             jjtn000.jjtSetLastToken(getToken(0));
           }
         }
@@ -186,6 +200,7 @@ void star()       : {/*@bgen(jjtree) Star */
 }
 
 // Atom --> <Char> | <Empty> | <EmptySet> | "(" Or ")"
+// Es kann schnell gehen, dass die Regeln nicht mehr eindeutig sind
 void atom()       : {/*@bgen(jjtree) Atom */
   ASTAtom jjtn000 = new ASTAtom(JJTATOM);
   boolean jjtc000 = true;
@@ -195,6 +210,7 @@ void atom()       : {/*@bgen(jjtree) Atom */
         try {
 /*@egen*/
 	<Char >
+	| <Char> "!"	 
 	| <Empty>
 	| <EmptySet>
 	|  "(" or() ")"/*@bgen(jjtree)*/
