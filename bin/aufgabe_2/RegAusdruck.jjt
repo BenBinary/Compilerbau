@@ -31,6 +31,10 @@
 
 	 TRACK_TOKENS = true;
 	 Bestimmmen wo ein  Fehler beginnt und wieder endet.
+
+	 In SimpleNode gibt es dann hierfür
+	   	protected Token firstToken;
+  		protected Token lastToken;
 	 
 */
 
@@ -79,15 +83,20 @@ void cu() : {}{
 
 
 // OR --> Concat ("|" Concat ) *
-Node or() #Or : {} {
-  
-	concat() ("|" concat())*
+void or() #Or : {>1} {
+
+  	// TODO: Nehmen des obersten Element vom Stack
+	
+	// In #Or() kann es eine Bedingung geben, sobald ein Knoten angelegt wird
+	// Bei #Or(> 1) wird dieser nur erzeugt, sobald ein Kindknoten vorhanden ist
+  	
+	concat() { jjtThis.firstConcat  } ("|" concat())*
 
 }
 
 
 // Concat --> Star (Star)*
-void concat() #Concat : {} {
+void concat() #Concat(>1) : {} {
 
 	star() (star())*
 	 

@@ -10,6 +10,12 @@ class ASTAtom extends SimpleNode {
 	 * 
 	 * Attribut inhalt wird nicht geändert.
 	 * 
+	 * 
+	 * Ideal für:
+	 *  - semantische Analyse
+	 *  - verschiedene Methoden schreiben
+	 *  - durch den Baum durchlaufen
+	 * 
 	 *  */
 	
 	Token inhalt;
@@ -24,6 +30,11 @@ class ASTAtom extends SimpleNode {
   }
 
 public void jjtSetLastToken(Token token) {
+	// TODO Auto-generated method stub
+	
+}
+
+public void jjtSetFirstToken(Token token) {
 	// TODO Auto-generated method stub
 	
 }

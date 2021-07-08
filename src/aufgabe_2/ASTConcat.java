@@ -19,5 +19,10 @@ public void jjtSetFirstToken(Token token) {
 	
 }
 
+public void jjtSetLastToken(Token token) {
+	// TODO Auto-generated method stub
+	
+}
+
 }
 /* JavaCC - OriginalChecksum=5911a12f1d4e3bffb249ef9066cbc152 (do not edit this line) */
